@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Hello App Engine</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="angular/controller.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+<script src="angular/angular-youtube-embed.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+ 
+ 
+  </head>
+<style type="text/css">
+	.loginUsername:hover {
+		cursor:pointer;
+	}
+	.logoutText:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	}
+	
+</style>
+<script type="text/javascript">
+	$(document).on("click", ".loginUsername", function() {
+		$(".errormessage").html();
+		$("#username").val("");
+		$(".loginField").toggle();
+	});
+</script>
+  <body ng-app="myApp" style="max-width: 100%;margin: 0px; background-color: black;">
+	<div style="z-index:100000;position: fixed;right: 25%; color:white;text-align: right;" ng-controller="MovieController">
+		<span class="loginUsername">Login / Registrierung</span>
+		<span class="logout" style="display:none;"><span class="showUsername">Hallo {{ username }}! </span><span class="logoutText" ng-click="logout()">Ausloggen</span></span>
+		<div class="loginField" style="display:none;padding: 10px; background-color: black; border: 1px solid white;">
+			<div class="loginFieldUsername">
+			<span class="errormessage"></span>
+			<span class="fieldUsername">Username: </span><input type="text" class="form-control" name="username" id="username" style="z-index:10000">
+			</div>
+			<div class="loginButtons">
+			<br>
+				<button ng-click="register()" class="register btn btn-primary">Registieren</button>
+				<button ng-click="login()" class="login btn btn-success">Einloggen</button>
+			</div>
+		</div>
+	
+	</div>
+	<div style="max-width: 100%; overflow: none; margin-top:0px;">
+	
+	 	<div class="" style="float: left; overflow-x: hidden; overflow-y: hidden; width: 25%;background-color: black;  max-width: 300px;">
+	  		
+	  			<div class="clearfix" ng-controller="MovieController">
+					  <div class="imageDisplay" ng-repeat="picture in recentPictures" style="height: 140px; width: 140px; max-height: 140px; max-width: 140px; float:left;">
+					  		<div class="begrenzer" style="max-height: 140px; max-width: 140px; height: 140px; width: 140px; overflow:hidden; margin:0px;">
+					  			<img style="min-width: 160px; max-width: 200px; min-height: 160px; max-height: 200px;" ng-src="{{ picture.url }}">  
+					  		</div>	
+						  	<div style="display: none;">
+							  	<p class="beschreibung">{{ picture.beschreibung }}</p>
+							  	<p class="plattform"><a href="{{ picture.url }}">{{ picture.plattform }}</a></p>
+						  	</div> 
+					  </div>
+					</div>
+	  	
+	  	</div>
+	  	<div style="position: fixed; height: 100vh;width: 59%; margin-left: 300px; border-left: 1px solid black; overflow: hidden;background-color: black; color: white;">
+	  	
+	  		<div class="activeImageDescriptionContainer" style="width: 100%; text-align: center; color: white; padding-top: 20px;">
+	  			<span class="activeImageName" style="font-size: 30px;">
+	  				
+	  			</span>
+	  			<br>
+	  			<span class="activeImagePlattform" style="font-size: 20px;">
+	  				
+	  			</span>
+	  		</div>
+	  		<div class="activeImageContainer text-center" style="max-width: 100%; max-height: 80vh; padding-top: 20px; ">
+	  			<img src="https://placehold.it/350x350" style="max-width: 90%; max-height: 80vh;">
+	  		</div>
+	  		<div class="favoriteButton" ng-controller="MovieController">
+	  			<span ng-click="postFavoriten()" class="like glyphicon glyphicon-star"></span>
+	  		</div>
+	
+		<style type="text/css">
+			.favoriteButton {
+				margin-top: 20px;
+				font-size: 40px; text-align: center;
+				color: white;
+				display: none;
+			}	
+			.like:hover {
+				cursor: pointer;
+				color: yellow;
+			}
+		</style>
+	  	</div>
+	  	
+	  </div>
+	  
+	  <div class="" style="position: absolute; top:0px;overflow-x: hidden; overflow-y: hidden; min-height: 100%;right:0px; width: 22%;background-color: black;  ">
+	  		
+	  			<div class="favoritenContainer clearfix " ng-controller="MovieController">
+					  
+				</div>
+	  	
+	  	</div>
+ 
+
+  </body>
+  <script type="text/javascript">
+ 	function changeImage(newActiveImage) {
+ 	
+ 			$(".active").removeClass("active");
+ 			$(newActiveImage).addClass("active");
+ 			// move all information from this to the active thingy
+ 			$(".activeImageName").html($(".active .beschreibung").text());
+ 			$(".activeImagePlattform").html($(".active .plattform").html());
+ 			$(".activeImageContainer img").attr("src", $(".active .begrenzer img").attr("src"));
+ 		
+ 	}
+ 	$(document).ready(function() {
+ 		$(document).on("click", ".imageDisplay", function () {
+ 		
+ 			changeImage(this);
+ 		});
+ 		
+ 	});
+ 	
+ 	
+ 	
+ </script>
+</html>
