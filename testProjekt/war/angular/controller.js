@@ -129,7 +129,7 @@ angular.module('myApp', [])
 		
 		var request = $http({
             method: "post",
-            url: "http://localhost:8888/user",
+            url: "http://104.155.60.202:8080/Grid-Cloud-Tech-1.0/testProjekt/war/user",
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 		    transformRequest: function(obj) {
 		        var str = [];
@@ -154,7 +154,7 @@ angular.module('myApp', [])
 	$scope.login = function() {
 		$(".errormessage").text("");
 		var usernames = jQuery("#username").val().trim();
-    	$http.get("http://localhost:8888/user?username=" + usernames + "")
+    	$http.get("http://104.155.60.202:8080/Grid-Cloud-Tech-1.0/testProjekt/war/user?username=" + usernames + "")
     	.success(function(response) {
 			doLogin(response);
 			$(".favoriteButton").toggle();
@@ -165,7 +165,7 @@ angular.module('myApp', [])
 	
     function getFavoriten() {
     	var username = jQuery("#username").val().trim();
-    	$http.get("http://localhost:8888/favoriten?username=" + username + "")
+    	$http.get("http://104.155.60.202:8080/Grid-Cloud-Tech-1.0/testProjekt/war/favoriten?username=" + username + "")
     	.success(function(response) {
     		$(response.results).each(function() {
     			var bild = {"url": this.url, "beschreibung": this.beschreibung, "plattform": this.plattform};    		
@@ -194,7 +194,7 @@ angular.module('myApp', [])
     	var request = $http({
     		
             method: "post",
-            url: "http://localhost:8888/favoriten",
+            url: "http://104.155.60.202:8080/Grid-Cloud-Tech-1.0/testProjekt/war/favoriten",
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
  		    transformRequest: function(obj) {
  		        var str = [];
