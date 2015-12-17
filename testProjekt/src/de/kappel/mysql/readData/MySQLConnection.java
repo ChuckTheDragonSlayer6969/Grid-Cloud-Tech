@@ -20,10 +20,10 @@ public class MySQLConnection {
 	private static String database = "user_informations";
 	
 	// Datenbankuser
-	private static String dbUser = "root2";
+	private static String dbUser = "root3";
 	
 	// Datenbankpasswort
-	private static String dbPassword = "penis123";
+	private static String dbPassword = "passwort123";
 	
 	private MySQLConnection() {
 	  try {
